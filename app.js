@@ -33,17 +33,33 @@ function generateUniqueLink(sisterName, brotherName) {
 }
 
 function openShareDialog(link) {
-    if (navigator.share) {
-        navigator.share({
-            title: 'Send Digital Rakhi',
-            text: 'Share this special Rakhi link with your brother!',
-            url: link
-        }).then(() => {
-            console.log('Thanks for sharing!');
-        }).catch(err => {
-            console.error('Could not share: ', err);
+    const imageFilePath = 'Images/digitalRakhiLink.jpg'; // Adjust path as needed
+
+    // Fetch the image as a blob
+    fetch(imageFilePath)
+        .then(response => response.blob())
+        .then(blob => {
+            const filesArray = [new File([blob], 'digitalRakhiLink.jpg', { type: 'image/jpeg' })];
+
+            // Check if the navigator can share files
+            if (navigator.canShare && navigator.canShare({ files: filesArray })) {
+                navigator.share({
+                    title: 'Send Digital Rakhi',
+                    text: 'Share this special Rakhi link with your brother!',
+                    url: link,
+                    files: filesArray
+                }).then(() => {
+                    console.log('Thanks for sharing!');
+                }).catch(err => {
+                    console.error('Could not share: ', err);
+                });
+            } else {
+                // Fallback if file sharing is not supported
+                alert('Sharing files is not supported on this device. Please copy the link manually.');
+            }
+        })
+        .catch(err => {
+            console.error('Error fetching the image: ', err);
         });
-    } else {
-        alert('Sharing not supported on this device. Please copy the link manually.');
-    }
 }
+
