@@ -1,0 +1,135 @@
+/* Basic reset, full height setup, and centering */
+body, html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4; /* Light grey background */
+}
+
+/* Center the form container with specific aspect ratio control */
+.container {
+    width: 100vw; /* Full width on mobile */
+    height: 100vh; /* Full height on mobile */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    background: white;
+}
+
+
+
+/* Style each form element */
+.form-group {
+    width: 56vw; /* Ensure form elements use full container width */
+    margin-bottom: 15px; /* Spacing between form fields */
+}
+
+
+input[type="text"],
+input[type="email"],
+input[type="tel"] {
+    width: 100%; /* Full width */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+/* Style for scaling the checkbox */
+input[type="checkbox"] {
+    transform: scale(1); /* Adjust this value to increase or decrease the size */
+    margin-right: 10px; /* Ensure some space between checkbox and label */
+    vertical-align: middle; /* Aligns checkbox vertically with the text */
+}
+
+/* Adjust the label alignment if necessary */
+input[type="checkbox"] + label {
+    vertical-align: middle; /* Ensures that the label aligns with the middle of the checkbox */
+    font-size: 12px; /* Adjust font size if necessary */
+}
+
+
+/* Submit button specific style */
+.submit-button {
+    width: max-content; /* Adjust width as needed */
+    padding: 8px 16px; /* Provides ample click area */
+    margin: 32px auto; /* Increased top margin to move the button lower */
+    display: block; /* Ensures the button is a block element */
+    background-color: #007BFF; /* Primary blue */
+    color: white;
+    border: none;
+    border-radius: 25px; /* Highly rounded edges for a pill-like appearance */
+    cursor: pointer;
+    font-size: 12px; /* Larger font size for better visibility */
+    font-weight: bold; /* Makes the text bold */
+    text-transform: uppercase; /* Converts text to uppercase */
+    letter-spacing: 1px; /* Adds spacing between letters */
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
+
+.submit-button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+
+
+
+/* Placeholder styling */
+input::placeholder {
+    color: #ccc;
+}
+
+input:focus::placeholder {
+    color: black;
+}
+
+@media (min-width: 641px) {
+    /* Apply aspect ratio for devices wider than 640px */
+    .container {
+        width: 56.25vh; /* 9/16 of the height */
+        height: 100vh; /* Full viewport height */
+    }
+
+    .form-group {
+        width: 30vh; /* Ensure form elements use full container width */
+        margin-bottom: 15px; /* Spacing between form fields */
+    }
+
+    /* Style for scaling the checkbox */
+input[type="checkbox"] {
+    transform: scale(1.2); /* Adjust this value to increase or decrease the size */
+    margin-right: 12px; /* Ensure some space between checkbox and label */
+    vertical-align: middle; /* Aligns checkbox vertically with the text */
+}
+
+/* Adjust the label alignment if necessary */
+input[type="checkbox"] + label {
+    vertical-align: middle; /* Ensures that the label aligns with the middle of the checkbox */
+    font-size: 14px; /* Adjust font size if necessary */
+}
+
+.submit-button {
+    width: max-content; /* Adjust width as needed */
+    padding: 10px 16px; /* Provides ample click area */
+    margin: 32px auto; /* Increased top margin to move the button lower */
+    display: block; /* Ensures the button is a block element */
+    background-color: #007BFF; /* Primary blue */
+    color: white;
+    border: none;
+    border-radius: 25px; /* Highly rounded edges for a pill-like appearance */
+    cursor: pointer;
+    font-size: 14px; /* Larger font size for better visibility */
+    font-weight: bold; /* Makes the text bold */
+    text-transform: uppercase; /* Converts text to uppercase */
+    letter-spacing: 1px; /* Adds spacing between letters */
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
+
+
+
+}
