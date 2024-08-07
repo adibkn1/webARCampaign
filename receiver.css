@@ -1,0 +1,42 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background: url('Images/rakhiImage.jpg') no-repeat center center;
+    background-size: cover;
+    transition: opacity 1s ease;
+}
+
+.message {
+    text-align: center;
+    margin: 80px; /* Adjust based on your design */
+    color: rgb(245, 96, 96); /* Improved visibility on dark backgrounds */
+}
+
+.tap-to-experience {
+    text-align: center;
+    margin-bottom: 20vh; /* Adjust based on your design */
+    color: white;
+    cursor: pointer;
+    text-shadow: 0 0 10px #000; /* Shadow for better readability */
+}
+
+@media (min-width: 641px) {
+    .container {
+        width: 56.4vh; /* 9/16 of the height, adjusted as per your requirement */
+        height: 100vh;
+    }
+}
