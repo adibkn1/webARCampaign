@@ -1,30 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+    
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Receive Digital Rakhi</title>
     <link rel="stylesheet" href="receiver.css"> <!-- Ensure this is the correct path -->
-    <!-- Add Firebase SDKs -->
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"></script>
-    <script>
-        // Your web app's Firebase configuration
-        const firebaseConfig = {
-          apiKey: "AIzaSyAv5H0-jgze_z1dvT8mHFRwusYXAiTSJgw",
-          authDomain: "digitalrakhi-f8060.firebaseapp.com",
-          projectId: "digitalrakhi-f8060",
-          storageBucket: "digitalrakhi-f8060.appspot.com",
-          messagingSenderId: "360526523502",
-          appId: "1:360526523502:web:3e1af0fd17e9bb1ca5ca7f",
-          measurementId: "G-FPJ5LHJEVS"
-        };
-
-        // Initialize Firebase
-        const app = firebase.initializeApp(firebaseConfig);
-        const db = firebase.firestore();
-    </script>
-    <script src="receiver.js"></script>
 </head>
 <body>
     <div class="container" onclick="fadeAway()">
@@ -35,5 +16,6 @@
             Tap to experience
         </div>
     </div>
+    <script src="receiver.js"></script>
 </body>
 </html>

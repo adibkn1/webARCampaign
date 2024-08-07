@@ -1,30 +1,28 @@
 document.getElementById('rakhiForm').addEventListener('submit', function(event) {
-    event.preventDefault(); // Prevent form from submitting normally
-
-    // Gather form inputs
+    event.preventDefault();
+  
     const sisterName = document.getElementById('sisterName').value.trim();
     const brotherName = document.getElementById('brotherName').value.trim();
     const email = document.getElementById('email').value.trim();
     const mobile = document.getElementById('mobile').value.trim();
     const termsAccepted = document.getElementById('terms').checked;
-
-    // Validate form fields
+  
     if (!sisterName || !brotherName || !email || !mobile || !termsAccepted) {
-        alert('Please fill out all fields and accept the terms.');
-        return;
+      alert('Please fill out all fields and accept the terms.');
+      return;
     }
-
-    // Generate a unique link
-    const uniqueLink = generateUniqueLink(sisterName, brotherName);
-
-    // Copy link to clipboard and open share dialog
-    navigator.clipboard.writeText(uniqueLink).then(() => {
-        // Proceed with sharing only if copy is successful
-        openShareDialog(uniqueLink);
-    }).catch(err => {
-        console.error('Could not copy link: ', err);
-    });
-});
+  
+    const formData = {
+      sisterName,
+      brotherName,
+      email,
+      mobile,
+      createdAt: new Date().toISOString() // Time of form submission
+    };
+  
+    submitToRealtimeDatabase(formData);
+  });
+  
 
 function generateUniqueLink(sisterName, brotherName) {
     // Use a simple random number for demo purposes
