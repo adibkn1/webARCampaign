@@ -14,18 +14,16 @@ document.getElementById('rakhiForm').addEventListener('submit', function(event) 
         return;
     }
 
-    // Generate a unique link (you can customize this logic)
+    // Generate a unique link
     const uniqueLink = generateUniqueLink(sisterName, brotherName);
 
-    // Copy link to clipboard
+    // Copy link to clipboard and open share dialog
     navigator.clipboard.writeText(uniqueLink).then(() => {
-        alert('Link copied to clipboard!');
+        // Proceed with sharing only if copy is successful
+        openShareDialog(uniqueLink);
     }).catch(err => {
         console.error('Could not copy link: ', err);
     });
-
-    // Open share dialog
-    openShareDialog(uniqueLink);
 });
 
 function generateUniqueLink(sisterName, brotherName) {
@@ -45,5 +43,7 @@ function openShareDialog(link) {
         }).catch(err => {
             console.error('Could not share: ', err);
         });
+    } else {
+        alert('Sharing not supported on this device. Please copy the link manually.');
     }
 }
