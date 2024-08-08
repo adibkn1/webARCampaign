@@ -22,8 +22,9 @@ body, html {
 
 .message {
     text-align: center;
-    margin: 80px; /* Adjust based on your design */
+    margin: 10vw; /* Adjust based on your design */
     color: rgb(245, 96, 96); /* Improved visibility on dark backgrounds */
+    font-size: 2.5vw;
 }
 
 .tap-to-experience {
@@ -38,5 +39,11 @@ body, html {
     .container {
         width: 56.4vh; /* 9/16 of the height, adjusted as per your requirement */
         height: 100vh;
+    }
+    .message {
+        text-align: center;
+        margin: 10vw; /* Adjust based on your design */
+        color: rgb(245, 96, 96); /* Improved visibility on dark backgrounds */
+        font-size: 2vw;
     }
 }
