@@ -35,7 +35,7 @@ document.getElementById('rakhiForm').addEventListener('submit', async function(e
             createdAt: new Date().toISOString()
         });
         console.log('Data saved successfully with token:', token);
-        const link = `http://127.0.0.1:8080/receiver.html?token=${token}`;
+        const link = `https://adibkn1.github.io/webARCampaign/receiver.html?token=${token}`;
         copyToClipboardAndShare(link);
     } catch (error) {
         console.error('Failed to save or share:', error);
