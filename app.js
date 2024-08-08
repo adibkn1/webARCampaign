@@ -5,11 +5,6 @@ import { firebaseConfig } from './firebaseConfig.js';
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 
-// Define the token generation logic
-function generateToken(name, email, mobile) {
-    return name.slice(0, 3) + mobile.slice(-4); // Simplified token based on user input
-}
-
 document.getElementById('rakhiForm').addEventListener('submit', async function(event) {
     event.preventDefault();
 
@@ -26,55 +21,54 @@ document.getElementById('rakhiForm').addEventListener('submit', async function(e
 
     const token = generateToken(sisterName, email, mobile);
 
-    try {
-        await set(ref(database, 'rakhis/' + token), {
-            sisterName,
-            brotherName,
-            email,
-            mobile,
-            createdAt: new Date().toISOString()
-        });
+    // Asynchronously set the data in Firebase and handle the UI response
+    set(ref(database, 'rakhis/' + token), {
+        sisterName,
+        brotherName,
+        email,
+        mobile,
+        createdAt: new Date().toISOString()
+    }).then(() => {
         console.log('Data saved successfully with token:', token);
-        const link = `http://127.0.0.1:8080/receiver.html?token=${token}`;
-        copyToClipboardAndShare(link);
-    } catch (error) {
+        const link = `https://adibkn1.github.io/webARCampaign/receiver.html?token=${token}`;
+        handleSharing(link);
+    }).catch(error => {
         console.error('Failed to save or share:', error);
         alert('Failed to process your request. Please try again.');
-    }
+    });
 });
 
-async function copyToClipboardAndShare(link) {
-    try {
-        await navigator.clipboard.writeText(link);
-        console.log('Link copied to clipboard!');
-        openShareDialog(link);
-    } catch (err) {
-        console.error('Failed to copy link:', err);
-        alert('Failed to copy link. Please try manually.');
-    }
+function generateToken(name, email, mobile) {
+    return name.slice(0, 3) + mobile.slice(-4); // Simplified token based on user input
 }
 
-async function openShareDialog(link) {
-    const imageFilePath = 'Images/digitalRakhiLink.jpg';
-
-    try {
-        const response = await fetch(imageFilePath);
-        const blob = await response.blob();
-        const filesArray = [new File([blob], 'digitalRakhiLink.jpg', { type: 'image/jpeg' })];
-
-        if (navigator.canShare && navigator.canShare({ files: filesArray })) {
-            await navigator.share({
-                title: 'Send Digital Rakhi',
-                text: 'Check out this digital Rakhi I sent you!',
-                url: link,
-                files: filesArray
+function handleSharing(link) {
+    if (navigator.share) {
+        const imageFilePath = 'Images/digitalRakhiLink.jpg';
+        fetch(imageFilePath)
+            .then(response => response.blob())
+            .then(blob => {
+                const filesArray = [new File([blob], 'digitalRakhiLink.jpg', { type: 'image/jpeg' })];
+                navigator.share({
+                    title: 'Send Digital Rakhi',
+                    text: 'Check out this digital Rakhi I sent you!',
+                    url: link,
+                    files: filesArray
+                })
+                .then(() => console.log('Thanks for sharing!'))
+                .catch(err => console.error('Error sharing:', err));
+            })
+            .catch(err => console.error('Error loading the image:', err));
+    } else {
+        // Clipboard copy if sharing is not supported
+        navigator.clipboard.writeText(link)
+            .then(() => {
+                alert('Link copied to clipboard! Please share manually.');
+                console.log('Link copied to clipboard!');
+            })
+            .catch(err => {
+                console.error('Failed to copy link:', err);
+                alert('Failed to copy link. Please try manually.');
             });
-            console.log('Thanks for sharing!');
-        } else {
-            console.log('Sharing files is not supported on this device. Copy the link manually.');
-        }
-    } catch (err) {
-        console.error('Error fetching the image or sharing:', err);
-        alert('Error in sharing process.');
     }
 }
