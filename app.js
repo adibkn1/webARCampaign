@@ -44,24 +44,20 @@ function generateToken(name, email, mobile) {
 
 function handleSharing(link) {
     if (navigator.share) {
-        const imageFilePath = 'Images/digitalRakhiLink.jpg';
-        fetch(imageFilePath)
-            .then(response => response.blob())
-            .then(blob => {
-                const filesArray = [new File([blob], 'digitalRakhiLink.jpg', { type: 'image/jpeg' })];
-                navigator.share({
-                    title: 'Send Digital Rakhi',
-                    text: 'Check out this digital Rakhi I sent you!',
-                    url: link,
-                    files: filesArray
-                })
-                .then(() => console.log('Thanks for sharing!'))
-                .catch(err => console.error('Error sharing:', err));
-            })
-            .catch(err => console.error('Error loading the image:', err));
+        // Define the content to be shared
+        const shareData = {
+            title: 'Send Digital Rakhi',
+            text: 'Check out this digital Rakhi I sent you!',
+            url: link
+        };
+
+        // Use the Web Share API to share the link
+        navigator.share(shareData)
+            .then(() => console.log('Thanks for sharing!'))
+            .catch(err => console.error('Error sharing:', err));
     } else {
         // Clipboard copy if sharing is not supported
-        navigator.clipboard.writeText(link)
+        navigator.clipboard.writeText(`${shareData.title} ${shareData.text} ${link}`)
             .then(() => {
                 alert('Link copied to clipboard! Please share manually.');
                 console.log('Link copied to clipboard!');
@@ -72,3 +68,4 @@ function handleSharing(link) {
             });
     }
 }
+
